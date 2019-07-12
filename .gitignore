@@ -1,0 +1,6 @@
+Library/
+.vscode/
+Logs/
+Temp/
+Assembly-CSharp.csproj
+RPG_ElfForest.sln
