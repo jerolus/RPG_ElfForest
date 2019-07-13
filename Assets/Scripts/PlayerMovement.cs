@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6;
+    public float speed = 4;
     public Animator anim;
     public Rigidbody2D rgdb;
 
@@ -17,17 +17,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        m_inputDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        m_inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (m_inputDirection != Vector2.zero)
         {
-            anim.SetBool("walking", true);
+            anim.SetBool("isWalking", true);
             anim.SetFloat("movX", m_inputDirection.x);
             anim.SetFloat("movY", m_inputDirection.y);
         }
         else
         {
-            anim.SetBool("walking", false);
+            anim.SetBool("isWalking", false);
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            anim.SetTrigger("isAttacking");
         }
     }
 
