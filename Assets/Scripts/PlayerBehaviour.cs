@@ -7,13 +7,15 @@ public class PlayerBehaviour : MonoBehaviour
     public float speed = 4;
     public Animator playerAnimator;
     public Rigidbody2D playerRigidbody;
+	public Weapon currentWeapon;
+	public GameObject currentArrow;
 
     private Vector2 m_inputDirection;
+	private Vector2 m_lastDirection;
 
     private void Start()
     {
-
-    }
+	}
 
     private void Update()
     {
@@ -32,6 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		if (m_inputDirection != Vector2.zero)
 		{
+			m_lastDirection = m_inputDirection;
 			playerAnimator.SetBool("isWalking", true);
 			playerAnimator.SetFloat("movX", m_inputDirection.x);
 			playerAnimator.SetFloat("movY", m_inputDirection.y);
@@ -45,11 +48,40 @@ public class PlayerBehaviour : MonoBehaviour
 	private void Attack()
 	{
 		AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-		bool attacking = animInfo.IsName("PlayerAttack");
+		string triggerWeapon = "";
+		string stateName = "";
+
+		switch (currentWeapon.type)
+		{
+			case Weapon.Type.Sword:
+				triggerWeapon = "isAttackingSword";
+				stateName = "PlayerSwordAttack";
+				break;
+			case Weapon.Type.Bow:
+				triggerWeapon = "isAttackingBow";
+				stateName = "PlayerBowAttack";
+				break;
+		}
+
+		bool attacking = animInfo.IsName(stateName);
 
 		if (Input.GetKeyDown("space") && !attacking)
 		{
-			playerAnimator.SetTrigger("isAttacking");
+			if (currentWeapon.type == Weapon.Type.Bow)
+			{
+				StartCoroutine(ThrowArrow());
+			}
+			playerAnimator.SetTrigger(triggerWeapon);
 		}
+	}
+
+	public IEnumerator ThrowArrow()
+	{
+		yield return new WaitForSeconds(0.1f);
+		GameObject arrowToThrow = Instantiate(currentArrow, gameObject.transform.position, Quaternion.identity);
+		ArrowBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ArrowBehaviour>();
+		arrowBehaviopur.direction = m_lastDirection;
+		yield return new WaitForSeconds(2f);
+		Destroy(arrowToThrow);
 	}
 }
