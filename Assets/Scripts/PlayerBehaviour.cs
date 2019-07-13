@@ -47,7 +47,7 @@ public class PlayerBehaviour : MonoBehaviour
 		AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
 		bool attacking = animInfo.IsName("PlayerAttack");
 
-		if (Input.GetKeyDown("space") && attacking)
+		if (Input.GetKeyDown("space") && !attacking)
 		{
 			playerAnimator.SetTrigger("isAttacking");
 		}
