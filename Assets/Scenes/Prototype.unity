@@ -1332,6 +1332,7 @@ GameObject:
   - component: {fileID: 118766068}
   - component: {fileID: 118766067}
   - component: {fileID: 118766066}
+  - component: {fileID: 118766071}
   m_Layer: 0
   m_Name: ClayPot (1)
   m_TagString: Untagged
@@ -1450,6 +1451,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &118766071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118766065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8e179fab1e5f5478a9515abfb1dc0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAnimationName: ClayPotDestroy
 --- !u!1 &137002053
 GameObject:
   m_ObjectHideFlags: 0
@@ -4826,6 +4840,7 @@ GameObject:
   - component: {fileID: 673781318}
   - component: {fileID: 673781322}
   - component: {fileID: 673781321}
+  - component: {fileID: 673781323}
   m_Layer: 0
   m_Name: ClayPot
   m_TagString: Untagged
@@ -4944,6 +4959,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &673781323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673781317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8e179fab1e5f5478a9515abfb1dc0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAnimationName: ClayPotDestroy
 --- !u!1 &675162613
 GameObject:
   m_ObjectHideFlags: 0
@@ -5699,8 +5727,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
-  m_Size: {x: 0.7, y: 0.8}
+  m_Offset: {x: 0, y: -0.3}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!95 &763046950
 Animator:
@@ -12166,7 +12194,7 @@ GameObject:
   - component: {fileID: 1523074848}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
