@@ -5,6 +5,7 @@ using UnityEngine;
 public class Destroyable : MonoBehaviour
 {
 	public string destroyAnimationName;
+	public GameObject itemDrop;
 
 	private Animator m_animator;
 	private Collider2D m_collider;
@@ -31,6 +32,10 @@ public class Destroyable : MonoBehaviour
 		{
 			m_animator.Play(destroyAnimationName);
 			yield return new WaitForSeconds(0.25f);
+			if (itemDrop)
+			{
+				Instantiate(itemDrop, transform.position, Quaternion.identity);
+			}
 			m_collider.enabled = false;
 		}
 	}

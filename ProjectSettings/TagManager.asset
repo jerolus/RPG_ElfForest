@@ -42,6 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 1387847943
+  - name: FixSortingLayer
+    uniqueID: 2470146257
     locked: 0

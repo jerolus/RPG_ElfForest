@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public GameController GetInstance()
+	public static GameController GetInstance()
 	{
 		if (m_instance != null)
 		{

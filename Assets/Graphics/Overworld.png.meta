@@ -107,6 +107,9 @@ TextureImporter:
   - first:
       213: -7077578495685720143
     second: Water
+  - first:
+      213: 334154914554335797
+    second: House
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -219,7 +222,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -240,7 +243,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -248,6 +251,27 @@ TextureImporter:
       bones: []
       spriteID: 66596d910a7126b4fbeb6f3892036a8d
       internalID: -7077578495685720143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: House
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 496
+        width: 74
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573ed0a4042c17f438ac5f6e9cdd19a1
+      internalID: 334154914554335797
       vertices: []
       indices: 
       edges: []

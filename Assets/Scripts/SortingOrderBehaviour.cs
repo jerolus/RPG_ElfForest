@@ -11,7 +11,7 @@ public class SortingOrderBehaviour : MonoBehaviour
     private void Start()
     {
 		m_sprite = gameObject.GetComponent<SpriteRenderer>();
-		m_sprite.sortingLayerName = "Player";
+		m_sprite.sortingLayerName = "FixSortingLayer";
 		m_sprite.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
     }
 
