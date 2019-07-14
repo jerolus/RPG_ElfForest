@@ -42,6 +42,7 @@ public class InventoryItem : MonoBehaviour
 
 	public void SetStacks(int newStacks)
 	{
+		Debug.Log(newStacks);
 		stacks = newStacks;
 		UpdateStacksText();
 	}

@@ -78,6 +78,17 @@ public class InventorySystem : MonoBehaviour
 						if (inventory[i].stacks > inventory[i].stackLimit)
 						{
 							stacksToFill = inventory[i].stacks - inventory[i].stackLimit;
+							inventory[i].SetStacks(inventory[i].stackLimit);
+
+							if (inventory.Count < maxSlots)
+							{
+								GameObject newInventorySlot = Instantiate(GetPrefabByType(typeToCompare), inventoryParent);
+								InventoryItem newInventoryItem = newInventorySlot.GetComponent<InventoryItem>();
+								Debug.Log(stacksToFill);
+								newInventoryItem.SetStacks(stacksToFill);
+								inventory.Add(newInventoryItem);
+								break;
+							}
 						}
 						else
 						{
