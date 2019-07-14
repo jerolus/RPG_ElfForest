@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class InventoryItem : MonoBehaviour
 	}
 
 	public Type type;
+	public int stackLimit = 1;
+	public int stacks = 1;
+	public Text stacksText;
+
+	private void Start()
+	{
+		UpdateStacksText();
+	}
 
 	public void OnClickItemInventory()
 	{
@@ -28,6 +37,24 @@ public class InventoryItem : MonoBehaviour
 				break;
 			case Type.LifePotion:
 				break;
+		}
+	}
+
+	public void SetStacks(int newStacks)
+	{
+		stacks = newStacks;
+		UpdateStacksText();
+	}
+
+	private void UpdateStacksText()
+	{
+		if (stacks == 1 || stacks == 0)
+		{
+			stacksText.text = "";
+		}
+		else
+		{
+			stacksText.text = stacks.ToString();
 		}
 	}
 }

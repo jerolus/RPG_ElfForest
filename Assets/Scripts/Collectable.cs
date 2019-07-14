@@ -8,7 +8,7 @@ public class Collectable : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "Player")
+		if (other.tag == "Player" && InventorySystem.GetInstance().CanAddStackType(inventoryItemType))
 		{
 			InventorySystem.GetInstance().AddInventoryItem(inventoryItemType);
 			Destroy(gameObject);

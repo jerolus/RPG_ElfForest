@@ -117,7 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
 			{
 				if (m_inventory.currentWeapon.type == InventoryItem.Type.Bow)
 				{
-					if (m_inventory.GetTypeNumber(InventoryItem.Type.Arrow) > 0)
+					if (m_inventory.GetStacksNumber(InventoryItem.Type.Arrow) > 0)
 					{
 						StartCoroutine(ThrowArrow());
 						m_playerAnimator.SetTrigger(triggerWeapon);
@@ -133,7 +133,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public IEnumerator ThrowArrow()
 	{
-		m_inventory.RemoveArrow();
+		m_inventory.RemoveStackType(InventoryItem.Type.Arrow);
 		yield return new WaitForSeconds(0.1f);
 		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
 		ArrowBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ArrowBehaviour>();
