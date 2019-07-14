@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
 	private static GameController m_instance;
 	public GameObject pauseMenu;
+	public Animator fadeAnimator;
+	public Text fadeText;
 
 	private bool isPlaying = false;
 
@@ -83,5 +86,11 @@ public class GameController : MonoBehaviour
 		{
 			Time.timeScale = 1;
 		}
+	}
+
+	public void DoFade(string textToShow)
+	{
+		fadeText.text = textToShow;
+		fadeAnimator.SetTrigger("doFade");
 	}
 }

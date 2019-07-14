@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
 	public Transform inventoryParent;
 	public InventoryItem currentWeapon;
 
+	private bool m_canMove = true;
     private Vector2 m_inputDirection;
 	private Vector2 m_lastDirection;
 
@@ -57,7 +58,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerRigidbody.MovePosition(playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
+		if (m_canMove)
+		{
+			playerRigidbody.MovePosition(playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
+		}
     }
 
 	private void CheckInput()
@@ -68,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void CheckMovementAnimations()
 	{
-		if (m_inputDirection != Vector2.zero)
+		if (m_inputDirection != Vector2.zero && m_canMove)
 		{
 			m_lastDirection = m_inputDirection;
 			playerAnimator.SetBool("isWalking", true);
@@ -83,7 +87,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void CheckAttack()
 	{
-		if (currentWeapon)
+		if (currentWeapon && m_canMove)
 		{
 			AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
 			string triggerWeapon = "";
@@ -130,6 +134,16 @@ public class PlayerBehaviour : MonoBehaviour
 		arrowBehaviopur.direction = m_lastDirection;
 		yield return new WaitForSeconds(2f);
 		Destroy(arrowToThrow);
+	}
+
+	public IEnumerator TeleportTransition(Transform transformToMove, string textToShow)
+	{
+		GameController.GetInstance().DoFade(textToShow);
+		m_canMove = false;
+		yield return new WaitForSeconds(0.6f);
+		transform.position = transformToMove.position;
+		yield return new WaitForSeconds(1f);
+		m_canMove = true;
 	}
 
 	public void AddInventoryItem(InventoryItem item)
