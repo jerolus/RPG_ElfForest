@@ -13,4 +13,21 @@ public class InventoryItem : MonoBehaviour
 	}
 
 	public Type type;
+
+	public void OnClickItemInventory()
+	{
+		switch (type)
+		{
+			case Type.Sword:
+				InventorySystem.GetInstance().currentWeapon = this;
+				break;
+			case Type.Bow:
+				InventorySystem.GetInstance().currentWeapon = this;
+				break;
+			case Type.Arrow:
+				break;
+			case Type.LifePotion:
+				break;
+		}
+	}
 }

@@ -283,7 +283,7 @@ RectTransform:
   m_Children:
   - {fileID: 239514902}
   m_Father: {fileID: 687663526}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 246503517}
   - component: {fileID: 246503516}
   m_Layer: 0
-  m_Name: Player_39
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1175,8 +1175,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 184547283}
   - {fileID: 1186032620}
+  - {fileID: 184547283}
   m_Father: {fileID: 1749890104}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1243,7 +1243,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!1 &894086272
 GameObject:
@@ -1593,7 +1593,7 @@ RectTransform:
   m_Children:
   - {fileID: 628748510}
   m_Father: {fileID: 687663526}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

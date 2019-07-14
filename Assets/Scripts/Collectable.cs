@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-	public InventoryItem inventoryItem;
+	public InventoryItem.Type inventoryItemType;
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Player")
 		{
-			PlayerBehaviour.GetInstance().AddInventoryItem(inventoryItem);
+			InventorySystem.GetInstance().AddInventoryItem(inventoryItemType);
 			Destroy(gameObject);
 		}
 	}

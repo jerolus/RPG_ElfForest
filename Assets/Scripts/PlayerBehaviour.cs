@@ -7,19 +7,16 @@ public class PlayerBehaviour : MonoBehaviour
 	private static PlayerBehaviour m_instance;
 
 	public float speed = 4;
-    public Animator playerAnimator;
-    public Rigidbody2D playerRigidbody;
-
-	public GameObject currentArrow;
-
-	public List<InventoryItem> inventory = new List<InventoryItem>();
-	public Transform inventoryParent;
-	public InventoryItem currentWeapon;
+	public GameObject arrowPrefab;
 
 	private bool m_canMove = true;
-    private Vector2 m_inputDirection;
+	private Vector2 m_inputDirection;
 	private Vector2 m_lastDirection;
+	private InventorySystem m_inventory;
+    private Animator m_playerAnimator;
+    private Rigidbody2D m_playerRigidbody;
 
+	#region Awake Start Update FixedUpdate
 	private void Awake()
 	{
 		SetInstance();
@@ -27,8 +24,28 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void Start()
     {
+		m_inventory = InventorySystem.GetInstance();
+		m_playerAnimator = GetComponent<Animator>();
+		m_playerRigidbody = GetComponent<Rigidbody2D>();
 	}
 
+	private void Update()
+    {
+		CheckInput();
+		CheckMovementAnimations();
+		CheckAttack();
+    }
+
+    private void FixedUpdate()
+    {
+		if (m_canMove)
+		{
+			m_playerRigidbody.MovePosition(m_playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
+		}
+    }
+	#endregion
+
+	#region Instance
 	public static PlayerBehaviour GetInstance()
 	{
 		if (m_instance != null)
@@ -48,22 +65,9 @@ public class PlayerBehaviour : MonoBehaviour
 			m_instance = this;
 		}
 	}
+	#endregion
 
-	private void Update()
-    {
-		CheckInput();
-		CheckMovementAnimations();
-		CheckAttack();
-    }
-
-    private void FixedUpdate()
-    {
-		if (m_canMove)
-		{
-			playerRigidbody.MovePosition(playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
-		}
-    }
-
+	#region Movement
 	private void CheckInput()
 	{
 		m_inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -75,25 +79,27 @@ public class PlayerBehaviour : MonoBehaviour
 		if (m_inputDirection != Vector2.zero && m_canMove)
 		{
 			m_lastDirection = m_inputDirection;
-			playerAnimator.SetBool("isWalking", true);
-			playerAnimator.SetFloat("movX", m_inputDirection.x);
-			playerAnimator.SetFloat("movY", m_inputDirection.y);
+			m_playerAnimator.SetBool("isWalking", true);
+			m_playerAnimator.SetFloat("movX", m_inputDirection.x);
+			m_playerAnimator.SetFloat("movY", m_inputDirection.y);
 		}
 		else
 		{
-			playerAnimator.SetBool("isWalking", false);
+			m_playerAnimator.SetBool("isWalking", false);
 		}
 	}
+	#endregion
 
+	#region Attack
 	private void CheckAttack()
 	{
-		if (currentWeapon && m_canMove)
+		if (m_inventory.currentWeapon && m_canMove)
 		{
-			AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+			AnimatorStateInfo animInfo = m_playerAnimator.GetCurrentAnimatorStateInfo(0);
 			string triggerWeapon = "";
 			string stateName = "";
 
-			switch (currentWeapon.type)
+			switch (m_inventory.currentWeapon.type)
 			{
 				case InventoryItem.Type.Sword:
 					triggerWeapon = "isAttackingSword";
@@ -109,17 +115,17 @@ public class PlayerBehaviour : MonoBehaviour
 
 			if (Input.GetKeyDown("space") && !attacking)
 			{
-				if (currentWeapon.type == InventoryItem.Type.Bow)
+				if (m_inventory.currentWeapon.type == InventoryItem.Type.Bow)
 				{
-					if (GetTypeNumber(InventoryItem.Type.Arrow) > 0)
+					if (m_inventory.GetTypeNumber(InventoryItem.Type.Arrow) > 0)
 					{
 						StartCoroutine(ThrowArrow());
-						playerAnimator.SetTrigger(triggerWeapon);
+						m_playerAnimator.SetTrigger(triggerWeapon);
 					}
 				}
 				else
 				{
-					playerAnimator.SetTrigger(triggerWeapon);
+					m_playerAnimator.SetTrigger(triggerWeapon);
 				}
 			}
 		}
@@ -127,56 +133,24 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public IEnumerator ThrowArrow()
 	{
-		RemoveArrow();
+		m_inventory.RemoveArrow();
 		yield return new WaitForSeconds(0.1f);
-		GameObject arrowToThrow = Instantiate(currentArrow, gameObject.transform.position, Quaternion.identity);
+		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
 		ArrowBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ArrowBehaviour>();
 		arrowBehaviopur.direction = m_lastDirection;
 		yield return new WaitForSeconds(2f);
 		Destroy(arrowToThrow);
 	}
+	#endregion
 
 	public IEnumerator TeleportTransition(Transform transformToMove, string textToShow)
 	{
-		GameController.GetInstance().DoFade(textToShow);
+		GameController.GetInstance().DoFade();
 		m_canMove = false;
 		yield return new WaitForSeconds(0.6f);
 		transform.position = transformToMove.position;
+		GameController.GetInstance().ChangeTextFade(textToShow);
 		yield return new WaitForSeconds(1f);
 		m_canMove = true;
-	}
-
-	public void AddInventoryItem(InventoryItem item)
-	{
-		item.transform.SetParent(inventoryParent);
-		inventory.Add(item);
-		if (item.type == InventoryItem.Type.Bow || item.type == InventoryItem.Type.Sword)
-		{
-			currentWeapon = item;
-		}
-	}
-
-	private int GetTypeNumber(InventoryItem.Type typeToCompare)
-	{
-		int numberToReturn = 0;
-		for (int i = 0; i < inventory.Count; i++)
-		{
-			if (inventory[i].type == typeToCompare)
-			{
-				numberToReturn++;
-			}
-		}
-		return numberToReturn;
-	}
-
-	private void RemoveArrow()
-	{
-		for (int i = 0; i < inventory.Count; i++)
-		{
-			if (inventory[i].type == InventoryItem.Type.Arrow)
-			{
-				inventory.Remove(inventory[i]);
-			}
-		}
 	}
 }

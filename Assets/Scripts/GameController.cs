@@ -54,8 +54,7 @@ public class GameController : MonoBehaviour
 
 	public void StartGame()
 	{
-		isPlaying = true;
-		SceneManager.LoadScene("Prototype");
+		StartCoroutine(StartGameCoroutine());
 	}
 
 	public void MainMenu()
@@ -88,9 +87,23 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public void DoFade(string textToShow)
+	private IEnumerator StartGameCoroutine()
+	{
+		isPlaying = true;
+		DoFade();
+		yield return new WaitForSeconds(0.6f);
+		ChangeTextFade("Prototype Enviroment");
+		SceneManager.LoadScene("Prototype");
+		yield return new WaitForSeconds(1f);
+	}
+
+	public void DoFade()
+	{
+		fadeAnimator.SetTrigger("doFade");
+	}
+
+	public void ChangeTextFade(string textToShow)
 	{
 		fadeText.text = textToShow;
-		fadeAnimator.SetTrigger("doFade");
 	}
 }
