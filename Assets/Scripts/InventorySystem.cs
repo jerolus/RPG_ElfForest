@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -8,7 +7,12 @@ public class InventorySystem : MonoBehaviour
 
 	public List<InventoryItem> inventory = new List<InventoryItem>();
 	public Transform inventoryParent;
+	public GameObject inventoryActive;
 	public int maxSlots = 15;
+
+	public InventoryItemSelected[] inventoryItemsSelected;
+	[HideInInspector]
+	public InventoryItemSelected currentInventoryItemSelected;
 
 	public GameObject inventorySlotSword;
 	public GameObject inventorySlotBow;
@@ -31,7 +35,22 @@ public class InventorySystem : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.I))
 		{
-			inventoryParent.gameObject.SetActive(!inventoryParent.gameObject.activeSelf);
+			inventoryActive.SetActive(!inventoryActive.activeSelf);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			SelectInventoryItem(inventoryItemsSelected[0]);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			SelectInventoryItem(inventoryItemsSelected[1]);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			SelectInventoryItem(inventoryItemsSelected[2]);
 		}
 	}
 
@@ -52,6 +71,27 @@ public class InventorySystem : MonoBehaviour
 		if (!m_instance)
 		{
 			m_instance = this;
+		}
+	}
+
+	public void SelectInventoryItem(InventoryItemSelected inventoryItemToSelect, bool force = false)
+	{
+		if (inventoryItemToSelect.avaiable && inventoryItemToSelect != currentInventoryItemSelected || force)
+		{
+			if (currentInventoryItemSelected)
+			{
+				currentInventoryItemSelected.selectedItemObject.SetActive(false);
+			}
+			currentInventoryItemSelected = inventoryItemToSelect;
+			currentInventoryItemSelected.selectedItemObject.SetActive(true);
+			if (currentInventoryItemSelected.type == InventoryItem.Type.Bow || currentInventoryItemSelected.type == InventoryItem.Type.Sword)
+			{
+				currentWeapon = currentInventoryItemSelected.inventoryItem;
+			}
+			else
+			{
+				currentWeapon = null;
+			}
 		}
 	}
 
@@ -84,7 +124,6 @@ public class InventorySystem : MonoBehaviour
 							{
 								GameObject newInventorySlot = Instantiate(GetPrefabByType(typeToCompare), inventoryParent);
 								InventoryItem newInventoryItem = newInventorySlot.GetComponent<InventoryItem>();
-								Debug.Log(stacksToFill);
 								newInventoryItem.SetStacks(stacksToFill);
 								inventory.Add(newInventoryItem);
 								break;
