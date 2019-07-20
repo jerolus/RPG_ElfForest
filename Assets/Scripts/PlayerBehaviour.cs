@@ -8,12 +8,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public float speed = 4;
 	public GameObject arrowPrefab;
+    public Animator playerAnimator;
 
 	private bool m_canMove = true;
 	private Vector2 m_inputDirection;
 	private Vector2 m_lastDirection;
 	private InventorySystem m_inventory;
-    private Animator m_playerAnimator;
     private Rigidbody2D m_playerRigidbody;
 
 	#region Awake Start Update FixedUpdate
@@ -25,7 +25,6 @@ public class PlayerBehaviour : MonoBehaviour
 	private void Start()
     {
 		m_inventory = InventorySystem.GetInstance();
-		m_playerAnimator = GetComponent<Animator>();
 		m_playerRigidbody = GetComponent<Rigidbody2D>();
 	}
 
@@ -79,13 +78,13 @@ public class PlayerBehaviour : MonoBehaviour
 		if (m_inputDirection != Vector2.zero && m_canMove)
 		{
 			m_lastDirection = m_inputDirection;
-			m_playerAnimator.SetBool("isWalking", true);
-			m_playerAnimator.SetFloat("movX", m_inputDirection.x);
-			m_playerAnimator.SetFloat("movY", m_inputDirection.y);
+			playerAnimator.SetBool("isWalking", true);
+			playerAnimator.SetFloat("movX", m_inputDirection.x);
+			playerAnimator.SetFloat("movY", m_inputDirection.y);
 		}
 		else
 		{
-			m_playerAnimator.SetBool("isWalking", false);
+			playerAnimator.SetBool("isWalking", false);
 		}
 	}
 	#endregion
@@ -95,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if (m_inventory.currentWeapon && m_canMove)
 		{
-			AnimatorStateInfo animInfo = m_playerAnimator.GetCurrentAnimatorStateInfo(0);
+			AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
 			string triggerWeapon = "";
 			string stateName = "";
 
@@ -120,12 +119,12 @@ public class PlayerBehaviour : MonoBehaviour
 					if (m_inventory.GetStacksNumber(InventoryItem.Type.Arrow) > 0)
 					{
 						StartCoroutine(ThrowArrow());
-						m_playerAnimator.SetTrigger(triggerWeapon);
+						playerAnimator.SetTrigger(triggerWeapon);
 					}
 				}
 				else
 				{
-					m_playerAnimator.SetTrigger(triggerWeapon);
+					playerAnimator.SetTrigger(triggerWeapon);
 				}
 			}
 		}
