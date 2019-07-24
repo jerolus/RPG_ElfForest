@@ -135,7 +135,7 @@ public class PlayerBehaviour : MonoBehaviour
 		m_inventory.RemoveStackType(InventoryItem.Type.Arrow);
 		yield return new WaitForSeconds(0.1f);
 		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
-		ArrowBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ArrowBehaviour>();
+		ProjectileBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ProjectileBehaviour>();
 		arrowBehaviopur.direction = m_lastDirection;
 		yield return new WaitForSeconds(2f);
 		Destroy(arrowToThrow);
@@ -151,5 +151,14 @@ public class PlayerBehaviour : MonoBehaviour
 		GameController.GetInstance().ChangeTextFade(textToShow);
 		yield return new WaitForSeconds(1f);
 		m_canMove = true;
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "EnemyAttack")
+		{
+			Debug.Log("DIED");
+			Destroy(this.gameObject);
+		}
 	}
 }
