@@ -21,7 +21,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDr
 	public Sprite icon;
 	public bool m_usable = false;
 
-	private Vector3 m_returnPosition;
+	[HideInInspector]
+	public Vector3 returnPosition;
+
 	private InventorySystem m_inventorySystem;
 
 	private void Start()
@@ -65,7 +67,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDr
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		m_returnPosition = transform.localPosition;
+		returnPosition = transform.localPosition;
 	}
 
 	public void OnDrag(PointerEventData eventData)
@@ -77,7 +79,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDr
 	{
 		if (RectTransformUtility.RectangleContainsScreenPoint(m_inventorySystem.inventoryParent as RectTransform, Input.mousePosition))
 		{
-			transform.localPosition = m_returnPosition;
+			transform.localPosition = returnPosition;
 		}
 		else if (RectTransformUtility.RectangleContainsScreenPoint(m_inventorySystem.inventoryItemsSelected[0].transform as RectTransform, Input.mousePosition))
 		{
@@ -93,8 +95,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDr
 		}
 		else
 		{
-			m_inventorySystem.inventory.Remove(this);
-			Destroy(this.gameObject);
+			if (m_usable)
+			{
+				transform.localPosition = returnPosition;
+			}
+			else
+			{
+				m_inventorySystem.currentItemToDestroy = this;
+				m_inventorySystem.destroyItemMessage.SetActive(true);
+			}
 		}
 	}
 
@@ -125,7 +134,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDr
 		}
 		else
 		{
-			transform.localPosition = m_returnPosition;
+			transform.localPosition = returnPosition;
 		}
 	}
 }

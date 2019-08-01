@@ -9,6 +9,9 @@ public class InventorySystem : MonoBehaviour
 	public Transform inventoryParent;
 	public GameObject inventoryActive;
 	public int maxSlots = 15;
+	public GameObject destroyItemMessage;
+	[HideInInspector]
+	public InventoryItem currentItemToDestroy;
 
 	public InventoryItemSelected[] inventoryItemsSelected;
 	[HideInInspector]
@@ -265,5 +268,20 @@ public class InventorySystem : MonoBehaviour
 		}
 
 		return itemToReturn;
+	}
+
+	public void CheckDestroyItem(bool destroy)
+	{
+		if (currentItemToDestroy && destroy)
+		{
+			inventory.Remove(currentItemToDestroy);
+			Destroy(currentItemToDestroy.gameObject);
+		}
+		else
+		{
+			currentItemToDestroy.transform.localPosition = currentItemToDestroy.returnPosition;
+		}
+		currentItemToDestroy = null;
+		destroyItemMessage.SetActive(false);
 	}
 }

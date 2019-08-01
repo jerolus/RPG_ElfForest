@@ -129,6 +129,8 @@ MonoBehaviour:
   stacks: 1
   stacksText: {fileID: 8275793446344132803}
   icon: {fileID: -3555468057966329373, guid: ef45c516952e1da43b7366a6036b1827, type: 3}
+  m_usable: 0
+  returnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &8168840783315573328
 GameObject:
   m_ObjectHideFlags: 0
