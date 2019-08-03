@@ -92,8 +92,8 @@ public class GameController : MonoBehaviour
 		isPlaying = true;
 		DoFade();
 		yield return new WaitForSeconds(0.6f);
-		ChangeTextFade("Prototype Enviroment");
-		SceneManager.LoadScene("Prototype");
+		ChangeTextFade("Own Village");
+		SceneManager.LoadScene("Tutorial");
 		yield return new WaitForSeconds(1f);
 	}
 
