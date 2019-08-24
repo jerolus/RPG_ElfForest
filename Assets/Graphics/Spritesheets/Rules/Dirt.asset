@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e4e4fc705376343a3e65b25d94f0e2, type: 3}
+  m_Name: Dirt
+  m_EditorClassIdentifier: 
+  m_Sprites:
+  - {fileID: 7514588755892943658, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: 906648967160992129, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: 7392177666183373623, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -4999063204005704590, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -5018941702371712841, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -2905045439335056271, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: 2525349167589040462, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -4174194722788222633, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -1887455400207238217, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: 5609176300251788727, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: 2954211050725584033, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -6607107617080580589, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -1698853204037445802, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -3634826268382616932, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
+  - {fileID: -3214261744251972846, guid: cb0e0cbf853e1324c83dd848085d488d, type: 3}
