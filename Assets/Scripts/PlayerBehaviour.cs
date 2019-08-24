@@ -13,7 +13,6 @@ public class PlayerBehaviour : MonoBehaviour
 	private bool m_canMove = true;
 	private Vector2 m_inputDirection;
 	private Vector2 m_lastDirection;
-	private InventorySystem m_inventory;
     private Rigidbody2D m_playerRigidbody;
 
 	#region Awake Start Update FixedUpdate
@@ -24,7 +23,6 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void Start()
     {
-		m_inventory = InventorySystem.GetInstance();
 		m_playerRigidbody = GetComponent<Rigidbody2D>();
 	}
 
@@ -92,47 +90,22 @@ public class PlayerBehaviour : MonoBehaviour
 	#region Attack
 	private void CheckAttack()
 	{
-		if (m_inventory.currentWeapon && m_canMove)
+		if (m_canMove)
 		{
 			AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-			string triggerWeapon = "";
-			string stateName = "";
 
-			switch (m_inventory.currentWeapon.type)
-			{
-				case InventoryItem.Type.Sword:
-					triggerWeapon = "isAttackingSword";
-					stateName = "PlayerSwordAttack";
-					break;
-				case InventoryItem.Type.Bow:
-					triggerWeapon = "isAttackingBow";
-					stateName = "PlayerBowAttack";
-					break;
-			}
-
-			bool attacking = animInfo.IsName(stateName);
+			bool attacking = animInfo.IsName("PlayerBowAttack");
 
 			if (Input.GetKeyDown("space") && !attacking)
 			{
-				if (m_inventory.currentWeapon.type == InventoryItem.Type.Bow)
-				{
-					if (m_inventory.GetStacksNumber(InventoryItem.Type.Arrow) > 0)
-					{
-						StartCoroutine(ThrowArrow());
-						playerAnimator.SetTrigger(triggerWeapon);
-					}
-				}
-				else
-				{
-					playerAnimator.SetTrigger(triggerWeapon);
-				}
+				StartCoroutine(ThrowArrow());
+				playerAnimator.SetTrigger("isAttackingBow");
 			}
 		}
 	}
 
 	public IEnumerator ThrowArrow()
 	{
-		m_inventory.RemoveStackType(InventoryItem.Type.Arrow);
 		yield return new WaitForSeconds(0.1f);
 		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
 		ProjectileBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ProjectileBehaviour>();
