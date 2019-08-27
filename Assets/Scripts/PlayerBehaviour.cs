@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
 	private static PlayerBehaviour m_instance;
 
 	public float speed = 4;
+	public int life = 100;
 	public GameObject arrowPrefab;
     public Animator playerAnimator;
 
@@ -14,6 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
 	private Vector2 m_inputDirection;
 	private Vector2 m_lastDirection;
     private Rigidbody2D m_playerRigidbody;
+	private GameController m_controller;
 
 	#region Awake Start Update FixedUpdate
 	private void Awake()
@@ -24,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
 	private void Start()
     {
 		m_playerRigidbody = GetComponent<Rigidbody2D>();
+		m_controller = GameController.GetInstance();
 	}
 
 	private void Update()
@@ -38,6 +41,12 @@ public class PlayerBehaviour : MonoBehaviour
 		if (m_canMove)
 		{
 			m_playerRigidbody.MovePosition(m_playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
+
+			if (m_inputDirection != Vector2.zero)
+			{
+				float angle = Mathf.Atan2(m_inputDirection.y, m_inputDirection.x) * Mathf.Rad2Deg;
+				transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			}
 		}
     }
 	#endregion
@@ -70,15 +79,12 @@ public class PlayerBehaviour : MonoBehaviour
 		m_inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 	}
 
-
 	private void CheckMovementAnimations()
 	{
 		if (m_inputDirection != Vector2.zero && m_canMove)
 		{
 			m_lastDirection = m_inputDirection;
 			playerAnimator.SetBool("isWalking", true);
-			playerAnimator.SetFloat("movX", m_inputDirection.x);
-			playerAnimator.SetFloat("movY", m_inputDirection.y);
 		}
 		else
 		{
@@ -117,21 +123,27 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public IEnumerator TeleportTransition(Transform transformToMove, string textToShow)
 	{
-		GameController.GetInstance().DoFade();
+		m_controller.DoFade();
 		m_canMove = false;
 		yield return new WaitForSeconds(0.6f);
 		transform.position = transformToMove.position;
-		GameController.GetInstance().ChangeTextFade(textToShow);
+		m_controller.ChangeTextFade(textToShow);
 		yield return new WaitForSeconds(1f);
 		m_canMove = true;
 	}
 
+	#region Life
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "EnemyAttack")
 		{
-			Debug.Log("DIED");
-			Destroy(this.gameObject);
+			life -= GameController.ENEMY_DAMAGE;
+			if (life <= 0)
+			{
+				Debug.Log("DIED");
+				Destroy(this.gameObject);
+			}
 		}
 	}
+	#endregion
 }

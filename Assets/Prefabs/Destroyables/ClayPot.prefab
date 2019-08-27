@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7441660520076065120}
   - component: {fileID: 7441660520076065121}
   - component: {fileID: 7441660520076065133}
-  - component: {fileID: 7441660520076065134}
   - component: {fileID: 7441660520076065132}
   m_Layer: 0
   m_Name: ClayPot
@@ -119,19 +118,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7441660520076065134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441660520076065122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb5ccafb67f87c47894f5a57ca4ee44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixInRuntime: 0
 --- !u!114 &7441660520076065132
 MonoBehaviour:
   m_ObjectHideFlags: 0

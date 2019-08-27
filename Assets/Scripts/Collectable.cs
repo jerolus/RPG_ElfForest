@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-	public InventoryItem.Type inventoryItemType;
+	public enum Type
+	{
+		Money,
+		Life
+	}
 
+	public Type type;
+
+	public int value;
+	
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "Player" && InventorySystem.GetInstance().CanAddStackType(inventoryItemType))
+		if (other.tag == "Player")
 		{
-			InventorySystem.GetInstance().AddInventoryItem(inventoryItemType);
+			switch (type)
+			{
+				case Type.Money:
+					GameController.GetInstance().money += value;
+					break;
+				case Type.Life:
+					PlayerBehaviour.GetInstance().life += value;
+					break;
+			}
 			Destroy(gameObject);
 		}
 	}

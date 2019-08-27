@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 	private static GameController m_instance;
+	public const int ENEMY_DAMAGE = 25;
+
+	public int money = 0;
+
 	public GameObject pauseMenu;
 	public Animator fadeAnimator;
 	public Text fadeText;
@@ -92,8 +96,8 @@ public class GameController : MonoBehaviour
 		isPlaying = true;
 		DoFade();
 		yield return new WaitForSeconds(0.6f);
-		ChangeTextFade("Own Village");
-		SceneManager.LoadScene("Tutorial");
+		ChangeTextFade("Town");
+		SceneManager.LoadScene("Town");
 		yield return new WaitForSeconds(1f);
 	}
 
