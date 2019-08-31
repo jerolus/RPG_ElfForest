@@ -44,7 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 			if (m_inputDirection != Vector2.zero)
 			{
-				float angle = Mathf.Atan2(m_inputDirection.y, m_inputDirection.x) * Mathf.Rad2Deg;
+				float angle = Mathf.Atan2(m_inputDirection.y, m_inputDirection.x) * Mathf.Rad2Deg - 90;
 				transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 			}
 		}

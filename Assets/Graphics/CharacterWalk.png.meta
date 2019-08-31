@@ -205,18 +205,18 @@ TextureImporter:
       name: CharacterWalk_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 100
-        width: 19
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b72c072a8c067c499046df8808eb8b3
+      spriteID: 04a4cf0001a34264d975868cbf929841
       internalID: 5242402504339785698
       vertices: []
       indices: 
@@ -226,18 +226,18 @@ TextureImporter:
       name: CharacterWalk_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 101
-        width: 20
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 229cd7f8401442e4fb43f44d42c7d7cb
+      spriteID: 4f9d1172ad8694143b881c1544af2afa
       internalID: -2714089779142991700
       vertices: []
       indices: 
@@ -247,18 +247,18 @@ TextureImporter:
       name: CharacterWalk_2
       rect:
         serializedVersion: 2
-        x: 71
-        y: 100
-        width: 18
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00976fb88ab0b32448516d5f14b4d340
+      spriteID: d31ea614ccb194447bf179fa6af44b7c
       internalID: 3094161660966317596
       vertices: []
       indices: 
@@ -268,271 +268,19 @@ TextureImporter:
       name: CharacterWalk_3
       rect:
         serializedVersion: 2
-        x: 102
-        y: 101
-        width: 20
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eac4af0570ce27540b2dc00be6bf8f79
+      spriteID: d8fe3cebe53ab2741a75304f301016c3
       internalID: 7572851284483819145
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_4
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 68
-        width: 17
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 53e701e7c8916f94e921d7b8604752d6
-      internalID: -3293163892613669830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_5
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 68
-        width: 15
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef7cdc97e0cbc274f84e2129ac711884
-      internalID: -335103577072071447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_6
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 68
-        width: 17
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f79117a08869cc34989fd583f4e55818
-      internalID: -1262583190408962528
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_7
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 68
-        width: 15
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fa72775a66739d4e8b500b66c20323f
-      internalID: 2273535981797914756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_8
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 36
-        width: 17
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8632532ed23cf974daca2c0f0ac48156
-      internalID: -235246837200716554
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_9
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 36
-        width: 16
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7fc4d7f0b89cfc54aaeb206c8232fc7d
-      internalID: -7591676764230815629
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_10
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 36
-        width: 17
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d00bafaef06b884bbe18e874ab88c04
-      internalID: -4949896119023079864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_11
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 36
-        width: 16
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6febeca5175276642a9e575faa5ea328
-      internalID: 3436781166482152048
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_12
-      rect:
-        serializedVersion: 2
-        x: 5
-        y: 4
-        width: 20
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a996b117e6a6a4940b83732ac9dd3029
-      internalID: 8384417168420311091
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_13
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 5
-        width: 19
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c83ecc4ff4682124680465d9ec8092de
-      internalID: -536431325088049555
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_14
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 4
-        width: 19
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ac1acf85828e234aa908257fa3a3e8d
-      internalID: -6292085365283582372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalk_15
-      rect:
-        serializedVersion: 2
-        x: 102
-        y: 5
-        width: 19
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 497217983ee879b46b457ea0cc087d73
-      internalID: 6908202510116284872
       vertices: []
       indices: 
       edges: []
