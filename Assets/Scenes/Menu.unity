@@ -1806,6 +1806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13feeb4810f21e47babdefef16a7267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
+  actualRound: 0
   pauseMenu: {fileID: 184547282}
   fadeAnimator: {fileID: 1186032623}
   fadeText: {fileID: 628748511}

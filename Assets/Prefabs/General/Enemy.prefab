@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7306417494bf2a544ae6fe16e9b68a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyBehaviour: {fileID: 5184045383397611358}
 --- !u!58 &5184045382747360116
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 5184045383397611357}
   projectilePrefab: {fileID: 5411250293292452200, guid: 5c14cf46a1a6f544fb8601dbfa1a4924,
     type: 3}
+  m_fireRate: 1
 --- !u!212 &5184045383397611329
 SpriteRenderer:
   m_ObjectHideFlags: 0

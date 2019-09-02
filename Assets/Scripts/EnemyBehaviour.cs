@@ -10,6 +10,8 @@ public class EnemyBehaviour : MonoBehaviour
 	private Vector2 m_direction;
 	private Transform m_target;
 	private bool m_canAttack = true;
+	public float m_fireRate = 1;
+	private float m_minFireRate = 0.4f;
 
 	private void Start()
 	{
@@ -27,9 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
 	public void CheckAttack()
 	{
 		AnimatorStateInfo animInfo = enemyAnimator.GetCurrentAnimatorStateInfo(0);
-		bool attacking = animInfo.IsName("EnemyAttack");
 
-		if (!attacking && m_canAttack)
+		if (m_canAttack)
 		{
 			StartCoroutine(ThrowProjectile());
 		}
@@ -50,10 +51,22 @@ public class EnemyBehaviour : MonoBehaviour
 		GameObject projectileToThrow = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity);
 		ProjectileBehaviour arrowBehaviopur = projectileToThrow.GetComponent<ProjectileBehaviour>();
 		arrowBehaviopur.direction = m_direction;
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(m_fireRate);
 		m_canAttack = true;
 		yield return new WaitForSeconds(1f);
 		Destroy(projectileToThrow);
+	}
+
+	public void SetFireRate(float newFireRate)
+	{
+		if (newFireRate >= m_minFireRate)
+		{
+			m_fireRate = newFireRate;
+		}
+		else
+		{
+			m_fireRate = m_minFireRate;
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

@@ -132,7 +132,7 @@ public class PlayerBehaviour : MonoBehaviour
 		m_canMove = true;
 	}
 
-	#region Life
+	#region Collisions
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "EnemyAttack")
@@ -143,6 +143,10 @@ public class PlayerBehaviour : MonoBehaviour
 				Debug.Log("DIED");
 				Destroy(this.gameObject);
 			}
+		}
+		else if (other.tag == "StartRound")
+		{
+			StartCoroutine(m_controller.StartRoundCoroutine());
 		}
 	}
 	#endregion

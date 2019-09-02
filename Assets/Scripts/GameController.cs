@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 	public const int ENEMY_DAMAGE = 25;
 
 	public int money = 0;
+	public int actualRound = 0;
 
 	public GameObject pauseMenu;
 	public Animator fadeAnimator;
@@ -58,7 +59,7 @@ public class GameController : MonoBehaviour
 
 	public void StartGame()
 	{
-		StartCoroutine(StartGameCoroutine());
+		StartCoroutine(GoToTownCoroutine());
 	}
 
 	public void MainMenu()
@@ -91,14 +92,22 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	private IEnumerator StartGameCoroutine()
+	public IEnumerator GoToTownCoroutine()
 	{
 		isPlaying = true;
 		DoFade();
 		yield return new WaitForSeconds(0.6f);
 		ChangeTextFade("Town");
 		SceneManager.LoadScene("Town");
-		yield return new WaitForSeconds(1f);
+	}
+
+	public IEnumerator StartRoundCoroutine()
+	{
+		DoFade();
+		yield return new WaitForSeconds(0.6f);
+		ChangeTextFade("Arena");
+		SceneManager.LoadScene("Arena");
+		actualRound++;
 	}
 
 	public void DoFade()
