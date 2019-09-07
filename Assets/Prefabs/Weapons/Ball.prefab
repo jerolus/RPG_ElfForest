@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5411250293292452207}
   - component: {fileID: 5411250293292452206}
   - component: {fileID: 5411250293292452205}
-  - component: {fileID: 5411250293292452201}
   m_Layer: 0
   m_Name: Ball
   m_TagString: EnemyAttack
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 5849325189442884660, guid: ef45c516952e1da43b7366a6036b1827,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,16 +134,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5411250293292452201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5411250293292452200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb5ccafb67f87c47894f5a57ca4ee44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixInRuntime: 1

@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		SetInstance();
-		DontDestroyOnLoad(gameObject);
 	}
 
     private void Start()
@@ -54,29 +53,25 @@ public class GameController : MonoBehaviour
 		if (!m_instance)
 		{
 			m_instance = this;
+			DontDestroyOnLoad(gameObject);
 		}
-	}
-
-	public void StartGame()
-	{
-		StartCoroutine(GoToTownCoroutine());
+		else
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
 	public void MainMenu()
 	{
+		Time.timeScale = 1;
 		isPlaying = false;
 		pauseMenu.SetActive(false);
-		SceneManager.LoadScene("Menu");
+		StartCoroutine(GoToMenuCoroutine());
 	}
 
 	public void ResumeGame()
 	{
 		CheckPause();
-	}
-
-	public void ExitGame()
-	{
-		Application.Quit();
 	}
 
 	private void CheckPause()
@@ -90,6 +85,14 @@ public class GameController : MonoBehaviour
 		{
 			Time.timeScale = 1;
 		}
+	}
+
+	public IEnumerator GoToMenuCoroutine()
+	{
+		DoFade();
+		yield return new WaitForSeconds(0.6f);
+		ChangeTextFade("");
+		SceneManager.LoadScene("Menu");
 	}
 
 	public IEnumerator GoToTownCoroutine()
