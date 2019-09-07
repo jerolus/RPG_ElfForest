@@ -24,7 +24,7 @@ public class Collectable : MonoBehaviour
 					GameController.GetInstance().money += value;
 					break;
 				case Type.Life:
-					PlayerBehaviour.GetInstance().life += value;
+					PlayerBehaviour.GetInstance().SetLife(PlayerBehaviour.GetInstance().GetLife() + value);
 					break;
 			}
 			Destroy(gameObject);

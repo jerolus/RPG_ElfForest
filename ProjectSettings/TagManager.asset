@@ -44,6 +44,3 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: FixSortingLayer
-    uniqueID: 2470146257
-    locked: 0

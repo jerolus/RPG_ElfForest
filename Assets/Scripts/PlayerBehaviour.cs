@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
 	private static PlayerBehaviour m_instance;
 
-	public float speed = 4;
-	public int life = 100;
+	public float speed = 4f;
 	public GameObject arrowPrefab;
-    public Animator playerAnimator;
+    public Animator animator;
+	public Slider slide;
 
+	private int m_life = 100;
 	private bool m_canMove = true;
-	private Vector2 m_inputDirection;
-	private Vector2 m_lastDirection;
-    private Rigidbody2D m_playerRigidbody;
+	private Vector2 m_direction;
+	private Vector2 m_mousePos;
+    private Rigidbody2D m_rigidbody;
 	private GameController m_controller;
+	private Camera m_camera;
 
 	#region Awake Start Update FixedUpdate
 	private void Awake()
@@ -25,8 +28,9 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void Start()
     {
-		m_playerRigidbody = GetComponent<Rigidbody2D>();
+		m_rigidbody = GetComponent<Rigidbody2D>();
 		m_controller = GameController.GetInstance();
+		m_camera = Camera.main;
 	}
 
 	private void Update()
@@ -40,13 +44,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
 		if (m_canMove)
 		{
-			m_playerRigidbody.MovePosition(m_playerRigidbody.position + m_inputDirection.normalized * speed * Time.deltaTime);
-
-			if (m_inputDirection != Vector2.zero)
-			{
-				float angle = Mathf.Atan2(m_inputDirection.y, m_inputDirection.x) * Mathf.Rad2Deg - 90;
-				transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-			}
+			m_rigidbody.MovePosition(m_rigidbody.position + m_direction * speed * Time.deltaTime);
+			Vector2 lookDir = m_mousePos - m_rigidbody.position;
+			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90;
+			m_rigidbody.rotation = angle;
 		}
     }
 	#endregion
@@ -76,19 +77,19 @@ public class PlayerBehaviour : MonoBehaviour
 	#region Movement
 	private void CheckInput()
 	{
-		m_inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		m_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		m_mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
 	}
 
 	private void CheckMovementAnimations()
 	{
-		if (m_inputDirection != Vector2.zero && m_canMove)
+		if (m_direction != Vector2.zero && m_canMove)
 		{
-			m_lastDirection = m_inputDirection;
-			playerAnimator.SetBool("isWalking", true);
+			animator.SetBool("isWalking", true);
 		}
 		else
 		{
-			playerAnimator.SetBool("isWalking", false);
+			animator.SetBool("isWalking", false);
 		}
 	}
 	#endregion
@@ -98,14 +99,10 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if (m_canMove)
 		{
-			AnimatorStateInfo animInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-
-			bool attacking = animInfo.IsName("PlayerBowAttack");
-
-			if (Input.GetKeyDown("space") && !attacking)
+			if (Input.GetKeyDown("space"))
 			{
 				StartCoroutine(ThrowArrow());
-				playerAnimator.SetTrigger("isAttackingBow");
+				animator.SetTrigger("isAttackingBow");
 			}
 		}
 	}
@@ -113,11 +110,33 @@ public class PlayerBehaviour : MonoBehaviour
 	public IEnumerator ThrowArrow()
 	{
 		yield return new WaitForSeconds(0.1f);
-		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
+		GameObject arrowToThrow = Instantiate(arrowPrefab, gameObject.transform.position, m_rigidbody.transform.rotation);
 		ProjectileBehaviour arrowBehaviopur = arrowToThrow.GetComponent<ProjectileBehaviour>();
-		arrowBehaviopur.direction = m_lastDirection;
+		arrowBehaviopur.direction = m_rigidbody.transform.up;
 		yield return new WaitForSeconds(2f);
 		Destroy(arrowToThrow);
+	}
+	#endregion
+
+	#region Life
+	public int GetLife()
+	{
+		return m_life;
+	}
+
+	public void SetLife(int newValue)
+	{
+		m_life = newValue;
+		if (m_life > 100)
+		{
+			m_life = 100;
+		}
+		else if(m_life <= 0)
+		{
+			Debug.Log("DIED");
+			Destroy(this.gameObject);
+		}
+		slide.value = m_life;
 	}
 	#endregion
 
@@ -137,12 +156,7 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if (other.tag == "EnemyAttack")
 		{
-			life -= GameController.ENEMY_DAMAGE;
-			if (life <= 0)
-			{
-				Debug.Log("DIED");
-				Destroy(this.gameObject);
-			}
+			SetLife(m_life - GameController.ENEMY_DAMAGE);
 		}
 		else if (other.tag == "StartRound")
 		{
