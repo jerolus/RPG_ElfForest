@@ -4340,10 +4340,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1148878281, guid: 1bf13cc3217b23d4fb5615eff8ed4a5c, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 7248027367245897288}
     - target: {fileID: 1792002690, guid: 1bf13cc3217b23d4fb5615eff8ed4a5c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4352,6 +4348,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1148878281, guid: 1bf13cc3217b23d4fb5615eff8ed4a5c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 7248027367245897288}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bf13cc3217b23d4fb5615eff8ed4a5c, type: 3}
 --- !u!20 &7248027367245897288
@@ -4430,6 +4430,7 @@ GameObject:
   - component: {fileID: 7248027367245897289}
   - component: {fileID: 7248027367245897288}
   - component: {fileID: 7248027367245897290}
+  - component: {fileID: 7248027367245897292}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4437,6 +4438,66 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7248027367245897292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7248027367245897291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 7248027367245897399}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!4 &7248027367245897399
 Transform:
   m_ObjectHideFlags: 0
