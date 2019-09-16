@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public class EnemyStaticBehaviour : MonoBehaviour
 {
-	public Animator enemyAnimator;
 	public GameObject projectilePrefab;
+	public float m_fireRate = 1;
 
+	private Animator m_animator;
+	private Rigidbody2D m_rigidbody;
 	private Vector2 m_direction;
 	private Transform m_target;
 	private bool m_canAttack = true;
-	public float m_fireRate = 1;
 	private float m_minFireRate = 0.4f;
 
 	private void Start()
 	{
+		m_rigidbody = gameObject.GetComponent<Rigidbody2D>();
+		m_animator = gameObject.GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -28,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 	public void CheckAttack()
 	{
-		AnimatorStateInfo animInfo = enemyAnimator.GetCurrentAnimatorStateInfo(0);
+		AnimatorStateInfo animInfo = m_animator.GetCurrentAnimatorStateInfo(0);
 
 		if (m_canAttack)
 		{
@@ -38,19 +41,19 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private void CheckDirection()
 	{
-		m_direction = (m_target.position - transform.position).normalized;
-		enemyAnimator.SetFloat("dirX", m_direction.x);
-		enemyAnimator.SetFloat("dirY", m_direction.y);
+		m_direction = m_target.transform.position - m_rigidbody.transform.position;
+		float angle = Mathf.Atan2(m_direction.y, m_direction.x) * Mathf.Rad2Deg - 90;
+		m_rigidbody.rotation = angle;
 	}
 
 	public IEnumerator ThrowProjectile()
 	{
 		m_canAttack = false;
-		enemyAnimator.Play("EnemyAttack");
+		m_animator.Play("EnemyAttack");
 		yield return new WaitForSeconds(0.1f);
 		GameObject projectileToThrow = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity);
-		ProjectileBehaviour arrowBehaviopur = projectileToThrow.GetComponent<ProjectileBehaviour>();
-		arrowBehaviopur.direction = m_direction;
+		ProjectileBehaviour projectileBehaviopur = projectileToThrow.GetComponent<ProjectileBehaviour>();
+		projectileBehaviopur.direction = m_direction;
 		yield return new WaitForSeconds(m_fireRate);
 		m_canAttack = true;
 		yield return new WaitForSeconds(1f);

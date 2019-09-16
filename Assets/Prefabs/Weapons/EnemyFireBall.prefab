@@ -4766,8 +4766,8 @@ GameObject:
   - component: {fileID: 6242358747184947179}
   - component: {fileID: 2888275645694096741}
   m_Layer: 0
-  m_Name: Arrow
-  m_TagString: Attack
+  m_Name: EnemyFireBall
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4800,7 +4800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  speed: 10
+  speed: 6
 --- !u!50 &6242358747184947190
 Rigidbody2D:
   serializedVersion: 4
@@ -4916,8 +4916,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.7609758, b: 0, a: 0}
-      key1: {r: 0.6886792, g: 0, b: 0.111488655, a: 1}
+      key0: {r: 0.66703594, g: 0.8867924, b: 0, a: 0}
+      key1: {r: 0.9622642, g: 0.68202597, b: 0.104396604, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

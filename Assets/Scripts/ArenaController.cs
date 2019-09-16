@@ -8,7 +8,7 @@ public class ArenaController : MonoBehaviour
 
 	public GameObject enemyPrefab;
 	public Transform enemyParent;
-	public List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
+	public List<EnemyStaticBehaviour> enemies = new List<EnemyStaticBehaviour>();
 	public List<Transform> enemiesSpawnPoints = new List<Transform>();
 	public int totalRoundEnemies = 4;
 	public int maxEnemiesAttacking = 4;
@@ -59,7 +59,7 @@ public class ArenaController : MonoBehaviour
 		for (int i = 0; i < maxEnemiesAttacking; i++)
 		{
 			GameObject newEnemy = Instantiate(enemyPrefab, enemiesSpawnPoints[i].position, Quaternion.identity, enemyParent);
-			enemies.Add(newEnemy.GetComponent<EnemyBehaviour>());
+			enemies.Add(newEnemy.GetComponent<EnemyStaticBehaviour>());
 			remainingEnemies--;
 		}
 
@@ -69,7 +69,7 @@ public class ArenaController : MonoBehaviour
 		}
 	}
 
-	public void KillEnemy(EnemyBehaviour enemyKilled)
+	public void KillEnemy(EnemyStaticBehaviour enemyKilled)
 	{
 		enemies.Remove(enemyKilled);
 		if (enemies.Count == 0)
@@ -93,7 +93,7 @@ public class ArenaController : MonoBehaviour
 		if (remainingEnemies > 0)
 		{
 			GameObject newEnemy = Instantiate(enemyPrefab, position, Quaternion.identity, enemyParent);
-			enemies.Add(newEnemy.GetComponent<EnemyBehaviour>());
+			enemies.Add(newEnemy.GetComponent<EnemyStaticBehaviour>());
 			remainingEnemies--;
 		}
 	}
