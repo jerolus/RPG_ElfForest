@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0bd104f4d8e7744971a7c73acc9141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5184045383397611331, guid: f9ce0fa3bdd3af841a2e830839b38016,
+  enemyPrefab: {fileID: 5184045383397611331, guid: f762c1fa8d21fc34ca08c995da8972b3,
     type: 3}
   enemyParent: {fileID: 1598780670}
   enemies: []

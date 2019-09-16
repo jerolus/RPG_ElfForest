@@ -2,85 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovementBehaviour : MonoBehaviour
+public class EnemyMovementBehaviour : EnemyBehaviour
 {
-	public Animator enemyAnimator;
-
-	private Vector2 m_direction;
-	private Transform m_target;
-	private bool m_canAttack = true;
-	public float m_fireRate = 1;
-	private float m_minFireRate = 0.4f;
+	public float speed = 2f;
+	public GameObject attackCollider;
 
 	private void Start()
 	{
+		m_rigidbody = gameObject.GetComponent<Rigidbody2D>();
+		m_animator = gameObject.GetComponent<Animator>();
 	}
 
 	private void Update()
 	{
 		if (m_target)
 		{
+			CheckMovement();
 			CheckDirection();
 			CheckAttack();
 		}
 	}
 
-	public void CheckAttack()
+	private void CheckMovement()
 	{
-		AnimatorStateInfo animInfo = enemyAnimator.GetCurrentAnimatorStateInfo(0);
-
-		if (m_canAttack)
+		if ((m_target.transform.position - transform.position).magnitude > 0.5f)
 		{
-			StartCoroutine(ThrowProjectile());
+			m_rigidbody.MovePosition(m_rigidbody.position + m_direction.normalized * speed * Time.deltaTime);
+		}
+	}
+
+	private void CheckAttack()
+	{
+		if (m_canAttack && (m_target.transform.position - transform.position).magnitude < 0.9f)
+		{
+			StartCoroutine(Attack());
 		}
 	}
 
 	private void CheckDirection()
 	{
-		m_direction = (m_target.position - transform.position).normalized;
-		enemyAnimator.SetFloat("dirX", m_direction.x);
-		enemyAnimator.SetFloat("dirY", m_direction.y);
+		m_direction = m_target.transform.position - m_rigidbody.transform.position;
+		float angle = Mathf.Atan2(m_direction.y, m_direction.x) * Mathf.Rad2Deg - 90;
+		m_rigidbody.rotation = angle;
 	}
 
-	public IEnumerator ThrowProjectile()
+	private IEnumerator Attack()
 	{
 		m_canAttack = false;
-		enemyAnimator.Play("EnemyAttack");
-		yield return new WaitForSeconds(0.1f);
-		//GameObject projectileToThrow = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity);
-		//ProjectileBehaviour arrowBehaviopur = projectileToThrow.GetComponent<ProjectileBehaviour>();
-		//arrowBehaviopur.direction = m_direction;
-		yield return new WaitForSeconds(m_fireRate);
+		m_animator.Play("EnemyAttack");
+		attackCollider.SetActive(true);
+		yield return new WaitForSeconds(0.2f);
+		attackCollider.SetActive(false);
+		yield return new WaitForSeconds(fireRate - 0.2f);
 		m_canAttack = true;
-		yield return new WaitForSeconds(1f);
-		//Destroy(projectileToThrow);
-	}
-
-	public void SetFireRate(float newFireRate)
-	{
-		if (newFireRate >= m_minFireRate)
-		{
-			m_fireRate = newFireRate;
-		}
-		else
-		{
-			m_fireRate = m_minFireRate;
-		}
-	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.tag == "Player")
-		{
-			m_target = other.transform;
-		}
-	}
-
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.tag == "Player")
-		{
-			m_target = null;
-		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDestroyer : MonoBehaviour
 {
-	public EnemyStaticBehaviour enemyBehaviour;
+	public EnemyBehaviour enemyBehaviour;
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Attack")

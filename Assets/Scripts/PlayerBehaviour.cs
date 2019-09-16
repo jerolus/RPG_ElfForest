@@ -44,7 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
 		if (m_canMove)
 		{
-			m_rigidbody.MovePosition(m_rigidbody.position + m_direction * speed * Time.deltaTime);
+			m_rigidbody.MovePosition(m_rigidbody.position + m_direction.normalized * speed * Time.deltaTime);
 			Vector2 lookDir = m_mousePos - m_rigidbody.position;
 			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90;
 			m_rigidbody.rotation = angle;
