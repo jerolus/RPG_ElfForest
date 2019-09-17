@@ -2,7 +2,7 @@ Library/
 .vscode/
 Logs/
 Temp/
-Assembly-CSharp.csproj
+.csproj
 RPG_ElfForest.sln
 .vs/
 obj/
