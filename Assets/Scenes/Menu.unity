@@ -6205,7 +6205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e462f4d0a3939d74387e34e1b90e760e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0, z: 0}
+  direction: {x: 1.25, y: 0, z: 0}
   center: {x: 0, y: 0, z: 0}
   frequency: 0.15
   offset: 0.25
