@@ -6,6 +6,7 @@ public class ArenaController : MonoBehaviour
 {
 	private static ArenaController m_instance;
 
+	public CameraBehaviour cameraBehaviour;
 	public GameObject enemyPrefab;
 	public Transform enemyParent;
 	public List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
@@ -15,6 +16,7 @@ public class ArenaController : MonoBehaviour
 	public int remainingEnemies;
 
 	private GameController m_controller;
+	private GameObject player;
 
 	private void Awake()
 	{
@@ -26,6 +28,8 @@ public class ArenaController : MonoBehaviour
 		m_controller = GameController.GetInstance();
 		SetRound();
 		SetEnemies();
+		player = Instantiate(m_controller.character, Vector3.zero, Quaternion.identity);
+		cameraBehaviour.target = player.transform;
 	}
 
 	public static ArenaController GetInstance()
@@ -74,7 +78,7 @@ public class ArenaController : MonoBehaviour
 		enemies.Remove(enemyKilled);
 		if (enemies.Count == 0)
 		{
-			StartCoroutine(m_controller.GoToTownCoroutine());
+			StartCoroutine(m_controller.GoToSelectMenuCoroutine());
 		}
 		else
 		{

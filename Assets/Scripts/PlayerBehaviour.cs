@@ -133,8 +133,8 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 		else if(m_life <= 0)
 		{
+			m_controller.MainMenu();
 			Debug.Log("DIED");
-			Destroy(this.gameObject);
 		}
 		slide.value = m_life;
 	}
@@ -157,10 +157,6 @@ public class PlayerBehaviour : MonoBehaviour
 		if (other.tag == "EnemyAttack")
 		{
 			SetLife(m_life - GameController.ENEMY_DAMAGE);
-		}
-		else if (other.tag == "StartRound")
-		{
-			StartCoroutine(m_controller.StartRoundCoroutine());
 		}
 	}
 	#endregion

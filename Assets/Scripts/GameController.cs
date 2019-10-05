@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
 	public Animator fadeAnimator;
 	public Text fadeText;
 
+	[HideInInspector]
+	public GameObject character;
+
 	private bool isPlaying = false;
 
 	private void Awake()
@@ -95,17 +98,18 @@ public class GameController : MonoBehaviour
 		SceneManager.LoadScene("Menu");
 	}
 
-	public IEnumerator GoToTownCoroutine()
+	public IEnumerator GoToSelectMenuCoroutine()
 	{
 		isPlaying = true;
 		DoFade();
 		yield return new WaitForSeconds(0.6f);
-		ChangeTextFade("Town");
-		SceneManager.LoadScene("Town");
+		ChangeTextFade("");
+		SceneManager.LoadScene("SelectMenu");
 	}
 
-	public IEnumerator StartRoundCoroutine()
+	public IEnumerator StartRoundCoroutine(GameObject characterSelected)
 	{
+		character = characterSelected;
 		DoFade();
 		yield return new WaitForSeconds(0.6f);
 		ChangeTextFade("Arena");
