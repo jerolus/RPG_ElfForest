@@ -7055,6 +7055,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 184547282}
   fadeAnimator: {fileID: 1186032623}
   fadeText: {fileID: 628748511}
+  character: {fileID: 0}
 --- !u!4 &1749890104
 Transform:
   m_ObjectHideFlags: 0
